@@ -1,11 +1,11 @@
 pipeline {
-    agent { label 'jdk_8' }
+    agent { label 'jdk_17' }
     stages {
         stage('vcs') {
             steps {
                 git url: 'https://github.com/TEJA79955/spring-petclinic.git',
-                branch: 'main'
-            } 
+                    branch: 'teja'
+            }
         }
         stage('package') {
             steps {
@@ -13,12 +13,5 @@ pipeline {
                 sh 'mvn package'
             }
         }
-        stage('SonarQube analysis') {
-            steps { 
-                withSonarQubeEnv('SONAR_123') {
-                  sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=springpractice_projectteja -Dsonar.organization=springpractice' 
-                }
-            }
-        }
-    }    
-}                
+    }
+}            
